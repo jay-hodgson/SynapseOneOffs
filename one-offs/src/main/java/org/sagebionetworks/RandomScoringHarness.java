@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import org.sagebionetworks.client.SynapseClient;
-import org.sagebionetworks.client.SynapseClientImpl;
 import org.sagebionetworks.evaluation.model.Submission;
 import org.sagebionetworks.evaluation.model.SubmissionBundle;
 import org.sagebionetworks.evaluation.model.SubmissionStatus;
@@ -21,21 +20,8 @@ public class RandomScoringHarness {
 	 */
 	public static void main(String[] args) {
 		String evalId = "1683419";
-		String sessionToken = "xxxxx";
-//		String repoUrl = "https://repo-prod.prod.sagebase.org/repo/v1";
-//		String authUrl = "https://repo-prod.prod.sagebase.org/auth/v1";
-//		String fileEndpointUrl = "https://repo-prod.prod.sagebase.org/file/v1";
-//		
-		String repoUrl = "http://localhost:8080/services-repository-develop-SNAPSHOT/repo/v1";
-		String authUrl = "http://localhost:8080/services-repository-develop-SNAPSHOT/auth/v1";
-		String fileEndpointUrl = "http://localhost:8080/services-repository-develop-SNAPSHOT/file/v1";
 		
-		SynapseClient synapseClient = new SynapseClientImpl();		
-		synapseClient.setSessionToken(sessionToken);
-		synapseClient.setRepositoryEndpoint(repoUrl);
-		synapseClient.setAuthEndpoint(authUrl);
-		synapseClient.setFileEndpoint(fileEndpointUrl);
-		synapseClient.appendUserAgent("JaysRandomScoringHarness");
+		SynapseClient synapseClient = LoginUtils.createSynapseClient("JaysRandomScoringHarness");		
 		
 		try {
 			PaginatedResults<SubmissionBundle> submissions = synapseClient.getAllSubmissionBundles(evalId, 0, Integer.MAX_VALUE);
