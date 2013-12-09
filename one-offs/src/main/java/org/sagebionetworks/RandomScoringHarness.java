@@ -19,9 +19,9 @@ public class RandomScoringHarness {
 	 * Throw away program used to write out random scores for an evaluation using the Synapse Java client
 	 */
 	public static void main(String[] args) {
-		String evalId = "1683419";
+		String evalId = "1683425";
 		
-		SynapseClient synapseClient = LoginUtils.createSynapseClient("JaysRandomScoringHarness");		
+		SynapseClient synapseClient = LoginUtils.createLocalSynapseClient("JaysRandomScoringHarness");		
 		
 		try {
 			PaginatedResults<SubmissionBundle> submissions = synapseClient.getAllSubmissionBundles(evalId, 0, Integer.MAX_VALUE);
@@ -40,13 +40,22 @@ public class RandomScoringHarness {
 					stringAnnotations = new ArrayList<StringAnnotation>();
 					annotations.setStringAnnos(stringAnnotations);
 				}
-				StringAnnotation scoreAnnotation = findStringAnnotation("SCORE", stringAnnotations);
-				scoreAnnotation.setValue(Double.toString(new Random().nextDouble()));
+				
+				//some of the entries should be scored, and some set to validated
+				if (new Random().nextDouble() > .5) {
+					//and half are scored
+					StringAnnotation scoreAnnotation = findStringAnnotation("SCORE", stringAnnotations);
+					scoreAnnotation.setValue(Double.toString(new Random().nextDouble()));
+					status.setStatus(SubmissionStatusEnum.SCORED);
+				} else {
+					status.setStatus(SubmissionStatusEnum.VALIDATED);
+					StringAnnotation scoreAnnotation = findStringAnnotation("SCORE", stringAnnotations);
+					scoreAnnotation.setValue("0");
+				}
 				
 				StringAnnotation userId = findStringAnnotation("USER_ID", stringAnnotations);
 				userId.setValue(submission.getUserId());
 				
-				status.setStatus(SubmissionStatusEnum.SCORED);
 				synapseClient.updateSubmissionStatus(status);
 			}
 		} catch (Exception e) {
