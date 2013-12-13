@@ -6,24 +6,29 @@ import org.sagebionetworks.client.SynapseClientImpl;
 
 public class LoginUtils {
 	public static SynapseClient createSynapseClient(String userAgent) {
-		SynapseClient synapseClient = new SynapseClientImpl();		
-		synapseClient.setSessionToken(SESSION_TOKEN);
-		synapseClient.setRepositoryEndpoint(PROD_REPO_URL);
-		synapseClient.setAuthEndpoint(PROD_AUTH_URL);
-		synapseClient.setFileEndpoint(PROD_FILE_URL);
-		synapseClient.appendUserAgent(userAgent);
-		return synapseClient;
+		return createSynapseClient(SESSION_TOKEN, PROD_REPO_URL, PROD_AUTH_URL, PROD_FILE_URL, userAgent);
 	}
 	
 	public static SynapseClient createLocalSynapseClient(String userAgent) {
+		return createSynapseClient(SESSION_TOKEN, LOCAL_REPO_URL, LOCAL_AUTH_URL, LOCAL_FILE_URL, userAgent);
+	}
+	
+	public static SynapseClient createLocalAnonymousSynapseClient(String userAgent) {
+		return createSynapseClient(null, LOCAL_REPO_URL, LOCAL_AUTH_URL, LOCAL_FILE_URL, userAgent);
+	}
+
+	public static SynapseClient createAnonymousSynapseClient(String userAgent) {
+		return createSynapseClient(null, PROD_REPO_URL, PROD_AUTH_URL, PROD_FILE_URL, userAgent);
+	}
+	
+	public static SynapseClient createSynapseClient(String sessionToken, String repo, String auth, String file, String userAgent) {
 		SynapseClient synapseClient = new SynapseClientImpl();		
-		synapseClient.setSessionToken(SESSION_TOKEN);
-		synapseClient.setRepositoryEndpoint(LOCAL_REPO_URL);
-		synapseClient.setAuthEndpoint(LOCAL_AUTH_URL);
-		synapseClient.setFileEndpoint(LOCAL_FILE_URL);
+		synapseClient.setSessionToken(sessionToken);
+		synapseClient.setRepositoryEndpoint(repo);
+		synapseClient.setAuthEndpoint(auth);
+		synapseClient.setFileEndpoint(file);
 		synapseClient.appendUserAgent(userAgent);
 		return synapseClient;
 	}
-
 
 }
