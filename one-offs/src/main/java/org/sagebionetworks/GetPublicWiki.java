@@ -9,20 +9,20 @@ import org.sagebionetworks.repo.model.wiki.WikiPage;
 public class GetPublicWiki {
 	
 	/**
-	 * Throw away program used to write out random scores for an evaluation using the Synapse Java client
+	 * Throw away program to attempt to read a public wiki page
 	 */
 	public static void main(String[] args) {
 		String entityId = "syn312572";
-		
-		SynapseClient synapseClient = LoginUtils.createAnonymousSynapseClient("JayPublicWikiTest");		
-		
+
+		SynapseClient synapseClient = LoginUtils.createAnonymousSynapseClient("JayPublicWikiTest");
+
 		try {
 			String rootId = null;
-			//copy portal synapse client getV2RootWikiId 
-            V2WikiPage rootPage = synapseClient.getV2RootWikiPage(entityId, ObjectType.ENTITY);
-            if (rootPage != null)
-                    rootId = rootPage.getId();
-    
+			// copy portal synapse client getV2RootWikiId
+			V2WikiPage rootPage = synapseClient.getV2RootWikiPage(entityId, ObjectType.ENTITY);
+			if (rootPage != null)
+				rootId = rootPage.getId();
+
 			WikiPageKey key = new WikiPageKey(entityId, ObjectType.ENTITY, rootId);
 			WikiPage page = synapseClient.getV2WikiPageAsV1(key);
 			System.out.println(page.getMarkdown());
