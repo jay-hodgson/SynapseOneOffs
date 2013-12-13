@@ -14,7 +14,7 @@ public class GetPublicWiki {
 	public static void main(String[] args) {
 		String entityId = "syn312572";
 
-		SynapseClient synapseClient = LoginUtils.createAnonymousSynapseClient("JayPublicWikiTest");
+		SynapseClient synapseClient = LoginUtils.createAnonymousStagingSynapseClient("JayPublicWikiTest");
 
 		try {
 			String rootId = null;

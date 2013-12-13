@@ -21,6 +21,10 @@ public class LoginUtils {
 		return createSynapseClient(null, PROD_REPO_URL, PROD_AUTH_URL, PROD_FILE_URL, userAgent);
 	}
 	
+	public static SynapseClient createAnonymousStagingSynapseClient(String userAgent) {
+		return createSynapseClient(null, STAGING_REPO_URL, STAGING_AUTH_URL, STAGING_FILE_URL, userAgent);
+	}
+	
 	public static SynapseClient createSynapseClient(String sessionToken, String repo, String auth, String file, String userAgent) {
 		SynapseClient synapseClient = new SynapseClientImpl();		
 		synapseClient.setSessionToken(sessionToken);
