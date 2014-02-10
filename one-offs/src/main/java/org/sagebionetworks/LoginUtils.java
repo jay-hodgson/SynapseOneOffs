@@ -9,6 +9,10 @@ public class LoginUtils {
 		return createSynapseClient(SESSION_TOKEN, PROD_REPO_URL, PROD_AUTH_URL, PROD_FILE_URL, userAgent);
 	}
 	
+	public static SynapseClient createStagingSynapseClient(String userAgent) {
+		return createSynapseClient(SESSION_TOKEN, STAGING_REPO_URL, STAGING_AUTH_URL, STAGING_FILE_URL, userAgent);
+	}
+
 	public static SynapseClient createLocalSynapseClient(String userAgent) {
 		return createSynapseClient(SESSION_TOKEN, LOCAL_REPO_URL, LOCAL_AUTH_URL, LOCAL_FILE_URL, userAgent);
 	}
