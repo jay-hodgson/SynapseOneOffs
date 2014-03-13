@@ -1,6 +1,7 @@
 package org.sagebionetworks;
 
 import org.sagebionetworks.client.SynapseClient;
+import org.sagebionetworks.repo.model.Entity;
 import org.sagebionetworks.repo.model.ObjectType;
 import org.sagebionetworks.repo.model.dao.WikiPageKey;
 import org.sagebionetworks.repo.model.v2.wiki.V2WikiPage;
@@ -12,20 +13,23 @@ public class GetPublicWiki {
 	 * Throw away program to attempt to read a public wiki page
 	 */
 	public static void main(String[] args) {
-		String entityId = "syn312572";
+		String entityId = "syn2367456";
 
-		SynapseClient synapseClient = LoginUtils.createAnonymousStagingSynapseClient("JayPublicWikiTest");
+		SynapseClient synapseClient = LoginUtils.createSynapseClient("JayPublicWikiTest");
 
 		try {
 			String rootId = null;
+			Entity e = synapseClient.getEntityById(entityId);
+			String parentId = e.getParentId();
+			System.out.println(parentId);
 			// copy portal synapse client getV2RootWikiId
-			V2WikiPage rootPage = synapseClient.getV2RootWikiPage(entityId, ObjectType.ENTITY);
-			if (rootPage != null)
-				rootId = rootPage.getId();
-
-			WikiPageKey key = new WikiPageKey(entityId, ObjectType.ENTITY, rootId);
-			WikiPage page = synapseClient.getV2WikiPageAsV1(key);
-			System.out.println(page.getMarkdown());
+//			V2WikiPage rootPage = synapseClient.getV2RootWikiPage(entityId, ObjectType.ENTITY);
+//			if (rootPage != null)
+//				rootId = rootPage.getId();
+//
+//			WikiPageKey key = new WikiPageKey(entityId, ObjectType.ENTITY, rootId);
+//			WikiPage page = synapseClient.getV2WikiPageAsV1(key);
+//			System.out.println(page.getMarkdown());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

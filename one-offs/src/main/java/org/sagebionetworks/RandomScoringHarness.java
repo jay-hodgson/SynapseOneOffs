@@ -19,9 +19,9 @@ public class RandomScoringHarness {
 	 * Throw away program used to write out random scores for an evaluation using the Synapse Java client
 	 */
 	public static void main(String[] args) {
-		String evalId = "1683425";
+		String evalId = "2356590";
 		
-		SynapseClient synapseClient = LoginUtils.createLocalSynapseClient("JaysRandomScoringHarness");		
+		SynapseClient synapseClient = LoginUtils.createSynapseClient("JaysRandomScoringHarness");		
 		
 		try {
 			PaginatedResults<SubmissionBundle> submissions = synapseClient.getAllSubmissionBundles(evalId, 0, Integer.MAX_VALUE);
