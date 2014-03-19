@@ -1,6 +1,5 @@
 package org.sagebionetworks;
 
-import java.io.BufferedReader;
 import java.net.URL;
 
 import org.sagebionetworks.client.SynapseClient;
@@ -15,7 +14,6 @@ public class DownloadAsAnonymous {
 	public static void main(String[] args) {
 		SynapseClient synapseClient = LoginUtils.createAnonymousSynapseClient("JayTestAnonymousDownload");		
 		
-		BufferedReader br = null;
 		try {
 			String entityId =  "syn2343245";
 			URL resolvedUrl;
@@ -50,11 +48,6 @@ public class DownloadAsAnonymous {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (Throwable e) {}
 		}
 	}
 
