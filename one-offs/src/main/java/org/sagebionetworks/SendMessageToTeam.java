@@ -13,11 +13,6 @@ import org.sagebionetworks.client.SynapseClient;
 import org.sagebionetworks.repo.model.message.MessageToUser;
 
 public class SendMessageToTeam {
-	private static final String acuteId = "3320951";
-	
-	/**
-	 * Throw away program to attempt to change my email address (verified that it is currently not supported)
-	 */
 	public static void main(String[] args) {
 		try {
 			Console console = System.console();
