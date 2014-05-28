@@ -41,7 +41,7 @@ public class SendMessageToTeam {
 		    String principalId = console.readLine("Enter the Team ID: ");
 		    
 		    String confirmation = console.readLine("Are you sure you want to send this message? [Y/N]");
-		    if ("y".equalsIgnoreCase(confirmation)) {
+		    if ("y".equalsIgnoreCase(confirmation.trim())) {
 			    byte[] htmlContent = Files.readAllBytes(Paths.get(path));
 				String fileHandleId = synapseClient.uploadToFileHandle(htmlContent, ContentType.create("text/html", StandardCharsets.UTF_8));
 				MessageToUser message = new MessageToUser();
