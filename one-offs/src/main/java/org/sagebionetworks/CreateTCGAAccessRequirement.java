@@ -2,14 +2,10 @@ package org.sagebionetworks;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.sagebionetworks.client.SynapseClient;
-import org.sagebionetworks.client.exceptions.SynapseForbiddenException;
 import org.sagebionetworks.repo.model.ACCESS_TYPE;
-import org.sagebionetworks.repo.model.Folder;
-import org.sagebionetworks.repo.model.Project;
 import org.sagebionetworks.repo.model.RestrictableObjectDescriptor;
 import org.sagebionetworks.repo.model.RestrictableObjectType;
 import org.sagebionetworks.repo.model.TermsOfUseAccessRequirement;
@@ -42,46 +38,11 @@ public class CreateTCGAAccessRequirement {
 	 */
 	public static void main(String[] args) {
 		SynapseClient synapseClient = LoginUtils.createStagingSynapseClient("Jay-creating-upload-access-requirement");
-//		String projectId = "syn2313744";
-//		String teamId = "3318980";
 		BufferedReader br = null;
 		try {
 			TermsOfUseAccessRequirement tou;
 			RestrictableObjectDescriptor rod;
-			////////////////evaluation
-//			tou = new TermsOfUseAccessRequirement();
-//			tou.setAccessType(ACCESS_TYPE.SUBMIT);
-//			tou.setTermsOfUse("Must abide by some rules to submit to the challenge");
-//			rod = new RestrictableObjectDescriptor();
-//			rod.setId(evalId);
-//			rod.setType(RestrictableObjectType.EVALUATION);
-//			tou.setSubjectIds(Arrays.asList(new RestrictableObjectDescriptor[]{rod}));
-//			tou = adminSynapseClient.createAccessRequirement(tou);
-//
-//			//try to update and delete as normal
-//			try {
-//				tou.setTermsOfUse("new terms");
-//				normalSynapseClient.updateAccessRequirement(tou);
-//				throw new Exception("Failed eval test!");
-//			} catch (SynapseForbiddenException e) {
-//				//expect failure
-//				System.out.println("verified evaluation update");
-//			}
-//			
-//			try {
-//				normalSynapseClient.deleteAccessRequirement(tou.getId());
-//				throw new Exception("Failed eval test!");
-//			} catch (SynapseForbiddenException e) {
-//				//expect failure
-//				System.out.println("verified evaluation delete");
-//			}
-//			
-//			//admin can update and delete
-//			adminSynapseClient.updateAccessRequirement(tou);
-//			adminSynapseClient.deleteAccessRequirement(tou.getId());
-			
-			
-			//////////////team
+
 			tou = new TermsOfUseAccessRequirement();
 			tou.setAccessType(ACCESS_TYPE.UPLOAD);
 			tou.setTermsOfUse(terms);
@@ -96,27 +57,6 @@ public class CreateTCGAAccessRequirement {
 			tou.setSubjectIds(rods);
 			tou = synapseClient.createAccessRequirement(tou);
 
-//			//try to update and delete as normal
-//			try {
-//				tou.setTermsOfUse("new terms");
-//				normalSynapseClient.updateAccessRequirement(tou);
-//				throw new Exception("Failed team test!");
-//			} catch (SynapseForbiddenException e) {
-//				//expect failure
-//				System.out.println("verified team update");
-//			}
-//			
-//			try {
-//				normalSynapseClient.deleteAccessRequirement(tou.getId());
-//				throw new Exception("Failed team test!");
-//			} catch (SynapseForbiddenException e) {
-//				//expect failure
-//				System.out.println("verified team delete");
-//			}
-//			
-//			//admin can update and delete
-//			adminSynapseClient.updateAccessRequirement(tou);
-//			adminSynapseClient.deleteAccessRequirement(tou.getId());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
