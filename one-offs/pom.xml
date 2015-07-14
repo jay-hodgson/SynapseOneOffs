@@ -9,7 +9,7 @@
 	<description>A collection of throw-away programs that are used to help Synapse users</description>
 	
 	<properties>
-	    <synapse.version>92.0-4-ga272241</synapse.version>
+	    <synapse.version>97.0-32-g98c4d57</synapse.version>
 	    <xstream.version>1.3.1</xstream.version>
 		<!-- Build time-determined default property values -->
 		<org.sagebionetworks.authenticationservice.privateendpoint>http://localhost:8080/services-authentication-${project.version}/auth/v1</org.sagebionetworks.authenticationservice.privateendpoint>
