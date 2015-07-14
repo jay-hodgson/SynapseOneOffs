@@ -1,13 +1,16 @@
 package org.sagebionetworks;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 import org.sagebionetworks.client.SynapseClient;
 import org.sagebionetworks.repo.model.AccessRequirement;
+import org.sagebionetworks.repo.model.Entity;
 import org.sagebionetworks.repo.model.RestrictableObjectDescriptor;
 import org.sagebionetworks.repo.model.RestrictableObjectType;
 import org.sagebionetworks.repo.model.TermsOfUseAccessRequirement;
 import org.sagebionetworks.repo.model.VariableContentPaginatedResults;
+import org.sagebionetworks.repo.model.attachment.AttachmentData;
 
 public class UpdateAccessRequirement {
 
@@ -46,17 +49,19 @@ public class UpdateAccessRequirement {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SynapseClient synapseClient = LoginUtils.createAdminStagingSynapseClient("JayUpdateAccessRequirement");		
+		SynapseClient synapseClient = LoginUtils.createSynapseClient("JayUpdateAccessRequirement");		
 		
 		BufferedReader br = null;
 		try {
+//			Entity e = synapseClient.getEntityById("syn2874024");
+//			e.setAttachments(new ArrayList<AttachmentData>());
 			RestrictableObjectDescriptor subjectId = new RestrictableObjectDescriptor();
-			subjectId.setId("3320951"); //a challenge team
+			subjectId.setId("3323870"); //a challenge team
 			subjectId.setType(RestrictableObjectType.TEAM);
 			VariableContentPaginatedResults<AccessRequirement> accessRequirements = synapseClient.getAccessRequirements(subjectId);
 			TermsOfUseAccessRequirement challengeAR = null;
 			for (AccessRequirement ar : accessRequirements.getResults()) {
-				if (ar.getId().equals(2483409l)) {
+				if (ar.getId().equals(3098037L)) {
 					challengeAR = (TermsOfUseAccessRequirement)ar;
 					break;
 				}
